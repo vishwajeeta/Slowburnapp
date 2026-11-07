@@ -1,3 +1,4 @@
+"use client";
 import { Image } from "expo-image";
 import { Link } from "expo-router";
 import { useState } from "react";
