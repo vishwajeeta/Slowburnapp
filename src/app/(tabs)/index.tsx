@@ -1,3 +1,4 @@
+import { Image } from "expo-image";
 import { Link } from "expo-router";
 import { useState } from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
@@ -5,6 +6,10 @@ export default function Index() {
   const [count, setCount] = useState(0);
   return (
     <View style={styles.container}>
+      <Image
+      source={require("../../../assets/images/icon.png")}
+      style={styles.image}
+      />
       <Text style={styles.text}>Hello world!</Text>
       <Text style={styles.text}>Count: {count}</Text>
       <View style={styles.button_container}>
@@ -34,5 +39,10 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   button_container: 
-   { marginTop: 20, width: 200, flexDirection: "row", justifyContent: "space-between" }
+   { marginTop: 20, width: 200, flexDirection: "row", justifyContent: "space-between" },
+  image: {
+    width: 100,
+    height: 100,
+    marginBottom: 20,
+  }
 });
