@@ -10,3 +10,5 @@ npm run reset-project
 ```
 npx expo start
 ```
+
+git config user.email "vishwajeetvishwa4@gmail.com"
