@@ -10,3 +10,7 @@ npm run reset-project
 ```
 npx expo start
 ```
+
+```
+eas build --platform android --profile preview
+```
