@@ -1,6 +1,7 @@
 
 import { useState } from "react";
 import {
+  Button,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -9,7 +10,28 @@ import {
 } from "react-native";
 import { LineChart } from "react-native-gifted-charts";
 
+import { Alert } from "react-native";
+
+import {
+  requestNotificationPermission,
+  scheduleDailyReminder,
+  scheduleWorkoutReminder,
+} from "@/utils/notifications";
+
 const GOAL = 20;
+
+const testNotification = async () => {
+  const granted = await requestNotificationPermission();
+
+  if (!granted) {
+    Alert.alert("Permission required", "Please allow notifications.");
+    return;
+  }
+
+  await scheduleWorkoutReminder(5);
+
+  Alert.alert("Scheduled!", "Notification will arrive in 5 seconds.");
+};
 
 export default function Index() {
   const [history, setHistory] = useState([{ value: 0 }]);
@@ -41,6 +63,21 @@ export default function Index() {
     Math.ceil(count / 5) * 5
   );
 
+  const enableDailyReminder = async () => {
+  const granted = await requestNotificationPermission();
+
+  if (!granted) {
+    Alert.alert("Permission required", "Allow notifications first.");
+    return;
+  }
+
+  await scheduleDailyReminder(19, 0);
+
+  Alert.alert(
+    "Reminder enabled!",
+    "You'll receive a workout reminder every day at 7:00 PM."
+  );
+};
   return (
     <ScrollView
       style={styles.screen}
@@ -246,7 +283,14 @@ export default function Index() {
         >
           <Text style={styles.resetText}>↻  Reset Workout</Text>
         </Pressable>
-
+<Button
+  title="Test Notification"
+  onPress={testNotification}
+/>
+<Button
+  title="Enable Daily Workout Reminder"
+  onPress={enableDailyReminder}
+/>
         <Text style={styles.footer}>
           KEEP MOVING. KEEP GROWING. 💙
         </Text>
